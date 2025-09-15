@@ -1,0 +1,67 @@
+name: P4 Deploy to GHCR
+
+on:
+  push:
+    paths:
+      - 'P4_DockerConsoleJob_GHCR/**'
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore P1_SampleConsoleJob.Tests/ScheduledJobApp.Tests.csproj
+
+    - name: Build
+      run: dotnet build P1_SampleConsoleJob.Tests/ScheduledJobApp.Tests.csproj --no-restore
+
+    - name: Test
+      run: dotnet test P1_SampleConsoleJob.Tests/ScheduledJobApp.Tests.csproj --no-build --verbosity normal --logger "console;verbosity=detailed"
+
+  build-and-push:
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Log in to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build and push Docker image
+      run: |
+        cd P4_DockerConsoleJob_GHCR
+
+        # Build the image
+        docker build -t ghcr.io/${{ github.repository_owner }}/scheduled-job:latest .
+
+        # Also tag with commit SHA for versioning
+        docker tag ghcr.io/${{ github.repository_owner }}/scheduled-job:latest \
+                   ghcr.io/${{ github.repository_owner }}/scheduled-job:${{ github.sha }}
+
+        # Push both tags
+        docker push ghcr.io/${{ github.repository_owner }}/scheduled-job:latest
+        docker push ghcr.io/${{ github.repository_owner }}/scheduled-job:${{ github.sha }}
+
+        echo "✅ Image pushed to GHCR"
+        echo "📦 Image: ghcr.io/${{ github.repository_owner }}/scheduled-job:latest"
+        echo ""
+        echo "To deploy to Azure, run:"
+        echo "az containerapp job update --name docker-console-job --resource-group rgDCJ --image ghcr.io/${{ github.repository_owner }}/scheduled-job:latest"

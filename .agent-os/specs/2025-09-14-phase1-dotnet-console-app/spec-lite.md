@@ -1,0 +1,3 @@
+# Spec Summary (Lite)
+
+Implement a .NET 8.0 console application with singleton instance management to prevent concurrent executions, featuring configurable sleep duration to simulate long-running processes. The application uses mutex-based locking to detect existing instances, causing new instances to gracefully exit while allowing the original to complete, with comprehensive logging throughout the lifecycle.

@@ -1,0 +1,97 @@
+name: Build and Deploy to Azure Container Apps
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'P4_DockerConsoleJob_GHCR/**'
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}/scheduled-job
+  AZURE_RESOURCE_GROUP: rgDCJ
+  AZURE_CONTAINER_APP: dockerConsoleJob
+  AZURE_CONTAINER_ENV: dockerConsoleJobEnv
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    outputs:
+      image-tag: ${{ steps.meta.outputs.tags }}
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Log in to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Extract metadata
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        tags: |
+          type=ref,event=branch
+          type=ref,event=pr
+          type=sha,prefix={{branch}}-
+          type=raw,value=latest,enable={{is_default_branch}}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./P4_DockerConsoleJob_GHCR
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+
+  deploy-to-azure:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Deploy to Azure Container Apps Job
+      uses: azure/CLI@v1
+      with:
+        inlineScript: |
+          # Create or update Container Apps Job
+          az containerapp job create \
+            --name ${{ env.AZURE_CONTAINER_APP }} \
+            --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
+            --environment ${{ env.AZURE_CONTAINER_ENV }} \
+            --image ${{ needs.build-and-push.outputs.image-tag }} \
+            --trigger-type "Schedule" \
+            --cron-expression "0 2 * * *" \
+            --parallelism 1 \
+            --replica-completion-count 1 \
+            --replica-timeout 7200 \
+            --cpu 0.5 \
+            --memory 1.0Gi \
+            --registry-server ${{ env.REGISTRY }} \
+            --registry-username ${{ github.actor }} \
+            --registry-password ${{ secrets.GITHUB_TOKEN }} \
+            --env-vars \
+              "ASPNETCORE_ENVIRONMENT=Production" \
+              "TZ=UTC" \
+            --command "/app/ScheduledJobApp" \
+            --args "--sleep-seconds" "300" "--enable-file-lock" \
+            || \
+          az containerapp job update \
+            --name ${{ env.AZURE_CONTAINER_APP }} \
+            --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
+            --image ${{ needs.build-and-push.outputs.image-tag }}

@@ -1,0 +1,6 @@
+version: '3.8'
+
+services:
+  dotnet-app:
+    image: mcr.microsoft.com/dotnet/runtime:8.0
+    command: ["dotnet", "--version"]

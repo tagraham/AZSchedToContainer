@@ -1,0 +1,6 @@
+version: '3.8'
+
+services:
+  scheduled-job:
+    build: .
+    command: ["--sleep-seconds", "10"]
