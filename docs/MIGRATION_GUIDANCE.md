@@ -103,20 +103,20 @@ Functions Approach:
 
 ```
 Where Functions Shine (Use Functions Here):
-✓ HTTP APIs with sub-second response times
-✓ Event-driven processing (ServiceBus, EventHub triggers)
-✓ Simple webhooks and callbacks
-✓ Lightweight scheduled tasks (< 5 minutes)
-✓ Real-time stream processing
-✓ Serverless APIs for mobile apps
+- HTTP APIs with sub-second response times
+- Event-driven processing (ServiceBus, EventHub triggers)
+- Simple webhooks and callbacks
+- Lightweight scheduled tasks (< 5 minutes)
+- Real-time stream processing
+- Serverless APIs for mobile apps
 
 Where Container Apps Excel (Use Containers Here):
-✓ Long-running batch jobs (> 10 minutes)
-✓ Complex workflows requiring orchestration
-✓ Large dataset processing
-✓ Legacy application migrations
-✓ Stateful operations
-✓ Applications requiring specific runtimes or dependencies
+- Long-running batch jobs (> 10 minutes)
+- Complex workflows requiring orchestration
+- Large dataset processing
+- Legacy application migrations
+- Stateful operations
+- Applications requiring specific runtimes or dependencies
 ```
 
 **A Balanced Architectural View**
@@ -214,17 +214,17 @@ What Stays Exactly the Same:
 Migration Risk Assessment:
 
 Container Approach:
-✓ Existing code continues to work
-✓ Rollback = redeploy to Windows
-✓ Testing = run container locally
-✓ Production issues = same debugging tools
+- Existing code continues to work
+- Rollback = redeploy to Windows
+- Testing = run container locally
+- Production issues = same debugging tools
 Risk Level: LOW
 
 Functions Rewrite:
-✗ New code with new bugs
-✗ Rollback = impossible after refactoring
-✗ Testing = learn new testing paradigms
-✗ Production issues = distributed system debugging
+- New code with new bugs
+- Rollback = impossible after refactoring
+- Testing = learn new testing paradigms
+- Production issues = distributed system debugging
 Risk Level: EXTREME
 ```
 

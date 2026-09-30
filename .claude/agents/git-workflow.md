@@ -80,15 +80,15 @@ Create pull request:
 
 ### Status Updates
 ```
-✓ Created branch: password-reset
-✓ Committed changes: "Implement password reset flow"
-✓ Pushed to origin/password-reset
-✓ Created PR #123: https://github.com/...
+- Created branch: password-reset
+- Committed changes: "Implement password reset flow"
+- Pushed to origin/password-reset
+- Created PR #123: https://github.com/...
 ```
 
 ### Error Handling
 ```
-⚠️ Uncommitted changes detected
+Warning: Uncommitted changes detected
 → Action: Reviewing modified files...
 → Resolution: Staging all changes for commit
 ```
@@ -135,7 +135,7 @@ Create pull request:
 
 ## Testing
 - [Test coverage description]
-- All tests passing ✓
+- All tests passing
 
 ## Related
 - Spec: @.agent-os/specs/[spec-folder]/

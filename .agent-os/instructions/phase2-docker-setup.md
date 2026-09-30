@@ -209,7 +209,7 @@ docker run --rm scheduled-job:latest whoami
 docker run --rm scheduled-job:latest ls -la /app
 ```
 
-## 💡 Tips and Tricks
+## Tips and Tricks
 
 ### Multi-Stage Build Benefits
 - **Smaller images:** Only runtime dependencies in final image
@@ -235,7 +235,7 @@ docker run --rm scheduled-job:latest ls -la /app
 - **Minimal packages:** Only install required dependencies
 - **Regular updates:** Keep base images updated
 
-## ⚠️ Common Pitfalls
+## Common Pitfalls
 
 ### Build Issues
 - **Context size:** Large build context slows builds
@@ -260,7 +260,7 @@ docker run --rm scheduled-job:latest ls -la /app
 - **Port conflicts:** Multiple containers using same ports
 - **Network isolation:** Containers can't communicate without proper networking
 
-## ✅ Verification Steps
+## Verification Steps
 
 ### 1. Container Builds Successfully
 ```bash
@@ -300,7 +300,7 @@ docker ps
 docker rm -f test-job
 ```
 
-## 🔍 Troubleshooting Guide
+## Troubleshooting Guide
 
 ### Build Failures
 
@@ -332,7 +332,7 @@ docker rm -f test-job
 **Problem:** Large image size
 **Solution:** Use Alpine base images and minimize installed packages
 
-## 🎯 Learning Checkpoint
+## Learning Checkpoint
 
 Before proceeding to Phase 3, ensure you can:
 - [ ] Build Docker images successfully
@@ -341,7 +341,7 @@ Before proceeding to Phase 3, ensure you can:
 - [ ] Use Docker Compose for local development
 - [ ] Troubleshoot common container issues
 
-## 📚 Key Concepts Learned
+## Key Concepts Learned
 
 1. **Multi-stage Builds:** Separating build and runtime environments
 2. **Container Security:** Non-root users and minimal base images

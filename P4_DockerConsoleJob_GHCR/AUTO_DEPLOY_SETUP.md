@@ -1,9 +1,9 @@
 # Deployment Options for P4
 
 ## Current Status
-✅ Container Apps Job is working
-✅ Manual deployment works
-⚠️ Auto-deploy requires workflow in ROOT .github/workflows/
+Container Apps Job is working
+Manual deployment works
+Warning: Auto-deploy requires workflow in ROOT .github/workflows/
 
 ## Why GitHub Actions Needs Root Directory
 
@@ -109,8 +109,8 @@ az containerapp job update \
 
 ## Important Notes
 
-⚠️ **The GitHub Actions workflow is NOT active until you push it to GitHub**
+Warning: **The GitHub Actions workflow is NOT active until you push it to GitHub**
 
-⚠️ **After each GitHub Actions deployment, you must manually update the Azure job to use the new image** (the workflow builds and pushes the image, but doesn't update the Azure job)
+Warning: **After each GitHub Actions deployment, you must manually update the Azure job to use the new image** (the workflow builds and pushes the image, but doesn't update the Azure job)
 
-💡 **Tip**: You could enhance the workflow to automatically update the Azure job, but that requires more Azure credentials setup.
+**Tip**: You could enhance the workflow to automatically update the Azure job, but that requires more Azure credentials setup.
