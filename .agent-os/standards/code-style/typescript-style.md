@@ -4,7 +4,7 @@
 
 ## Naming Conventions
 
-### ✅ DO
+### DO
 - Use `PascalCase` for types, interfaces, classes, and enums
   ```typescript
   interface UserProfile { }
@@ -32,7 +32,7 @@
   function validateEmailFormat(email: string): boolean { }
   ```
 
-### ❌ DON'T
+### DON'T
 - Use `snake_case` for variables or functions
   ```typescript
   // Bad
@@ -56,7 +56,7 @@
 
 ## Type Definitions
 
-### ✅ DO
+### DO
 - Prefer `interface` for object shapes and extensible contracts
   ```typescript
   interface User {
@@ -97,7 +97,7 @@
   }
   ```
 
-### ❌ DON'T
+### DON'T
 - Use `any` type (use `unknown` instead when type is truly unknown)
   ```typescript
   // Bad
@@ -126,7 +126,7 @@
 
 ## Import/Export Organization
 
-### ✅ DO
+### DO
 - Group imports in logical order with spacing
   ```typescript
   // 1. Node modules
@@ -157,7 +157,7 @@
   import type { User } from './types';
   ```
 
-### ❌ DON'T
+### DON'T
 - Mix import types with regular imports randomly
   ```typescript
   // Bad
@@ -178,7 +178,7 @@
 
 ## Error Handling & Type Safety
 
-### ✅ DO
+### DO
 - Use type guards for runtime type checking
   ```typescript
   function isUser(obj: unknown): obj is User {
@@ -210,7 +210,7 @@
   }
   ```
 
-### ❌ DON'T
+### DON'T
 - Use non-null assertion (`!`) unless absolutely necessary
   ```typescript
   // Bad (unless you're 100% certain)
@@ -232,7 +232,7 @@
 
 ## Code Documentation
 
-### ✅ DO
+### DO
 - Document complex types and interfaces
   ```typescript
   /**
@@ -261,7 +261,7 @@
   }
   ```
 
-### ❌ DON'T
+### DON'T
 - Over-document obvious code
   ```typescript
   // Bad
@@ -282,14 +282,14 @@
 
 ## General Best Practices
 
-### ✅ DO
+### DO
 - Enable and use ESLint with TypeScript rules
 - Use Prettier for consistent code formatting
 - Prefer composition over inheritance
 - Keep functions small and focused on single responsibility
 - Use meaningful variable names that don't require comments
 
-### ❌ DON'T
+### DON'T
 - Disable TypeScript strict checks without good reason
 - Mix tabs and spaces (use Prettier to avoid this)
 - Create overly complex type definitions that are hard to understand

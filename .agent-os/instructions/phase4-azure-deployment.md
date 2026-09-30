@@ -369,7 +369,7 @@ jobs:
 
     - name: Create deployment summary
       run: |
-        echo "## 🚀 Deployment Summary" >> $GITHUB_STEP_SUMMARY
+        echo "## Deployment Summary" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "**Image:** \`${{ needs.build.outputs.image-uri }}\`" >> $GITHUB_STEP_SUMMARY
         echo "**Build Number:** ${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
@@ -603,9 +603,9 @@ STATUS=$(az containerapp show \
   --query properties.provisioningState -o tsv)
 
 if [ "$STATUS" = "Succeeded" ]; then
-    echo "✅ Container app is running"
+    echo "Container app is running"
 else
-    echo "❌ Container app status: $STATUS"
+    echo "Container app status: $STATUS"
     exit 1
 fi
 
@@ -630,15 +630,15 @@ if az containerapp job show --name "job-$CONTAINER_APP_NAME" --resource-group $R
     az containerapp job start \
       --name "job-$CONTAINER_APP_NAME" \
       --resource-group $RESOURCE_GROUP
-    echo "✅ Manual job execution triggered"
+    echo "Manual job execution triggered"
 else
-    echo "ℹ️  Container app job not found (may not be configured)"
+    echo "Container app job not found (may not be configured)"
 fi
 
-echo "🎉 Azure deployment tests completed!"
+echo "Azure deployment tests completed!"
 ```
 
-## 💡 Tips and Tricks
+## Tips and Tricks
 
 ### Azure Container Apps Best Practices
 - **Resource sizing:** Start small and scale based on monitoring
@@ -664,7 +664,7 @@ echo "🎉 Azure deployment tests completed!"
 - **Image scanning:** Scan container images for vulnerabilities
 - **Secrets rotation:** Implement automatic secret rotation
 
-## ⚠️ Common Pitfalls
+## Common Pitfalls
 
 ### Azure Resource Issues
 - **Naming conflicts:** Container registry names must be globally unique
@@ -690,7 +690,7 @@ echo "🎉 Azure deployment tests completed!"
 - **Health checks:** Configure appropriate startup and liveness probes
 - **Revision management:** Understand traffic splitting between revisions
 
-## ✅ Verification Steps
+## Verification Steps
 
 ### 1. Azure Resources Created
 ```bash
@@ -723,7 +723,7 @@ az monitor metrics alert list --resource-group $RESOURCE_GROUP
 # Should show configured alert rules
 ```
 
-## 🔍 Advanced Troubleshooting
+## Advanced Troubleshooting
 
 ### Container App Issues
 ```bash
@@ -764,7 +764,7 @@ az acr repository list --name $ACR_NAME
 az acr repository show-tags --name $ACR_NAME --repository scheduled-job
 ```
 
-## 🎯 Learning Checkpoint
+## Learning Checkpoint
 
 Congratulations! You've successfully completed all phases. You should now be able to:
 - [ ] Deploy containerized applications to Azure Container Apps
@@ -773,7 +773,7 @@ Congratulations! You've successfully completed all phases. You should now be abl
 - [ ] Manage production environments securely
 - [ ] Scale and optimize containerized workloads
 
-## 📚 Key Concepts Mastered
+## Key Concepts Mastered
 
 1. **Cloud Deployment:** Azure Container Apps configuration and management
 2. **CI/CD Pipelines:** Automated build, test, and deployment workflows
@@ -782,7 +782,7 @@ Congratulations! You've successfully completed all phases. You should now be abl
 5. **Monitoring:** Application insights, logging, and alerting
 6. **Production Operations:** Blue-green deployments, scaling, and rollbacks
 
-## 🎉 Congratulations!
+## Congratulations!
 
 You've successfully completed the entire containerization tutorial! You now have:
 
@@ -801,7 +801,7 @@ You've successfully completed the entire containerization tutorial! You now have
 5. **Advanced Monitoring:** Implement distributed tracing with OpenTelemetry
 6. **Multi-cloud Deployments:** Deploy to AWS ECS or Google Cloud Run
 
-## 📖 Additional Resources
+## Additional Resources
 
 - [Azure Container Apps Documentation](https://docs.microsoft.com/en-us/azure/container-apps/)
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)

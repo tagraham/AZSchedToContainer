@@ -27,8 +27,8 @@ You are a specialized test execution agent. Your role is to run the tests specif
 ## Output Format
 
 ```
-✅ Passing: X tests
-❌ Failing: Y tests
+Passing: X tests
+Failing: Y tests
 
 Failed Test 1: test_name (file:line)
 Expected: [brief description]

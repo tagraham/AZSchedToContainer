@@ -493,9 +493,9 @@ docker build -t scheduled-job:test .
 echo "Test 1: Basic execution..."
 docker run --rm scheduled-job:test
 if [ $? -eq 0 ]; then
-    echo "✅ Basic execution passed"
+    echo "Basic execution passed"
 else
-    echo "❌ Basic execution failed"
+    echo "Basic execution failed"
     exit 1
 fi
 
@@ -504,10 +504,10 @@ echo "Test 2: Volume mounting..."
 mkdir -p ./test-logs
 docker run --rm -v ./test-logs:/app/logs scheduled-job:test
 if [ -f "./test-logs/job-*-success.marker" ]; then
-    echo "✅ Volume mounting passed"
+    echo "Volume mounting passed"
     rm -rf ./test-logs
 else
-    echo "❌ Volume mounting failed"
+    echo "Volume mounting failed"
     exit 1
 fi
 
@@ -518,9 +518,9 @@ sleep 65  # Wait for health check to start
 HEALTH_STATUS=$(docker inspect --format='{{.State.Health.Status}}' $CONTAINER_ID)
 docker rm -f $CONTAINER_ID
 if [ "$HEALTH_STATUS" = "healthy" ]; then
-    echo "✅ Health check passed"
+    echo "Health check passed"
 else
-    echo "❌ Health check failed: $HEALTH_STATUS"
+    echo "Health check failed: $HEALTH_STATUS"
     exit 1
 fi
 
@@ -528,7 +528,7 @@ fi
 echo "Test 4: Error handling..."
 # This would need to be implemented based on your error scenarios
 
-echo "🎉 All container integration tests passed!"
+echo "All container integration tests passed!"
 ```
 
 ### Step 6: Run and Monitor Containers
@@ -557,7 +557,7 @@ docker stats scheduled-job-dev
 # Open http://localhost:8080 in browser
 ```
 
-## 💡 Tips and Tricks
+## Tips and Tricks
 
 ### Container Logging Best Practices
 - **Structured logs:** Use consistent formats for parsing
@@ -583,7 +583,7 @@ docker stats scheduled-job-dev
 - **Restart policies:** Handle container failures appropriately
 - **Log rotation:** Prevent log files from filling disk
 
-## ⚠️ Common Pitfalls
+## Common Pitfalls
 
 ### Volume Issues
 - **Permission denied:** Container user can't write to host directories
@@ -609,7 +609,7 @@ docker stats scheduled-job-dev
 - **Resource monitoring:** Not tracking container resource usage
 - **Alerting:** No notifications when containers fail
 
-## ✅ Verification Steps
+## Verification Steps
 
 ### 1. Container Runs Successfully
 ```bash
@@ -647,7 +647,7 @@ curl -f http://localhost:8080
 # Should return Dozzle interface
 ```
 
-## 🔍 Advanced Troubleshooting
+## Advanced Troubleshooting
 
 ### Debug Container Issues
 ```bash
@@ -692,7 +692,7 @@ docker run --rm -v ./logs:/app/logs scheduled-job:latest touch /app/logs/test.tx
 docker inspect <container_id> | grep -A 10 Mounts
 ```
 
-## 🎯 Learning Checkpoint
+## Learning Checkpoint
 
 Before proceeding to Phase 4, ensure you can:
 - [ ] Run containers with persistent volumes
@@ -701,7 +701,7 @@ Before proceeding to Phase 4, ensure you can:
 - [ ] Handle container failures gracefully
 - [ ] Understand container networking basics
 
-## 📚 Key Concepts Learned
+## Key Concepts Learned
 
 1. **Container Integration:** Making applications container-aware
 2. **Volume Management:** Persistent data and log handling

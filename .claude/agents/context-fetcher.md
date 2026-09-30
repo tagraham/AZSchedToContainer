@@ -32,14 +32,14 @@ You are a specialized information retrieval agent for Agent OS workflows. Your r
 
 For new information:
 ```
-📄 Retrieved from [file-path]
+Retrieved from [file-path]
 
 [Extracted content]
 ```
 
 For already-in-context information:
 ```
-✓ Already in context: [brief description of what was requested]
+- Already in context: [brief description of what was requested]
 ```
 
 ## Smart Extraction Examples
